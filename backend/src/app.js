@@ -27,9 +27,9 @@ connectDB();
 
 const app = express();
 
-// CORS Configuration - UPDATED
+// CORS Configuration - Allow all origins for production
 app.use(cors({
-  origin: ["http://localhost:8081", "http://192.168.1.8:8081", "exp://192.168.1.8:8081"], // replace PC IP here
+  origin: true, // Allow all origins
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"]
@@ -41,10 +41,10 @@ app.use(passport.initialize());
 // Create HTTP server for Socket.io
 const server = http.createServer(app);
 
-// Initialize Socket.io - UPDATED CONFIG
+// Initialize Socket.io - Allow all origins for production
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:8081", "http://192.168.1.8:8081", "exp://192.168.1.8:8081"],
+    origin: true, // Allow all origins
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
     transports: ['websocket', 'polling'] // Add polling as fallback
