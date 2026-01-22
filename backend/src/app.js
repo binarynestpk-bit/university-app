@@ -86,6 +86,11 @@ app.use("/api/student/seat-booking", studentSeatBookingRoutes);
 app.use("/api/admin/drivers", adminDriverRoutes);
 app.use('/api/chat', chatbotRoutes);
 // ... rest of the code ...
+// Health check endpoint for Railway
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 // Root endpoint
 app.get("/", (req, res) => {
   res.send("🚀 Server is running...");
